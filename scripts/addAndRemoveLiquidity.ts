@@ -12,9 +12,9 @@ async function main() {
     await helpers.impersonateAccount(TOKEN_HOLDER);
     const impersonatedSigner = await ethers.getSigner(TOKEN_HOLDER);
 
-    const amountTokenDesired = ethers.parseUnits("10", 6); // USDC has 6 decimals
+    const amountTokenDesired = ethers.parseUnits("10", 6); 
     const amountTokenMin = ethers.parseUnits("7", 6);
-    const amountETHMin = ethers.parseEther("0.05"); // Adjust this value based on current ETH/USDC rate
+    const amountETHMin = ethers.parseEther("0.05"); 
 
     const deadline = Math.floor(Date.now() / 1000) + (60 * 10);
 
@@ -44,7 +44,7 @@ async function main() {
         1,
         impersonatedSigner.address,
         deadline,
-        { value: ethers.parseEther("0.1") } // Specify the amount of ETH to send
+        { value: ethers.parseEther("0.1") } 
     );
     await addLiqTx.wait();
 
@@ -85,6 +85,7 @@ async function main() {
     // Check final token balances
     const finalUsdcBal = await USDC_Contract.balanceOf(impersonatedSigner.address);
     const finalETHBal = await ethers.provider.getBalance(impersonatedSigner.address)
+    
     // Check LP token balance after removal
     const lpBalAfterRemoval = await LP_ETH_Contract.balanceOf(impersonatedSigner.address);
     console.log("LP Token Balance after removal:", Number(lpBalAfterRemoval));
